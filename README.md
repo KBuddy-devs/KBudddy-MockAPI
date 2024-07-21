@@ -1,11 +1,17 @@
-# KBuddy-Mocks
+# KBuddy Mocking API Server
 
-개발 테스트에 사용할 Mocking Data 코드에 대한 저장소입니다.
+Mocking Data를 뿌려주는 더미 API 서버입니다.
 
-## 구조
+@author [bnbong](bbbong9@gmail.com)
 
-```Directory Tree
-root_folder
-ㄴ frontend  // 뷰에 사용되는 Mocking data 폴더 (더미 이미지 등)
-ㄴ backend  // Mocking API server sources
-```
+## API Docs
+
+추가 예정 (server-side rendered (redoc, swagger 규격) 문서 링크 제공)
+
+## Stack
+
+- Server : Python 3.11.1 + FastAPI + uvicorn
+- Schema : Pydantic
+- Dev virtual env : poetry
+- Formatting : black formatter (with PyCharm default settings - flake8)
+- CI/CD : Github Actions (CI) + Jenkins (CD)
