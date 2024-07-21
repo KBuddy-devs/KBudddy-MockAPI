@@ -20,9 +20,12 @@ from src.router import router
 from src.core.settings import AppSettings
 from src.utils.documents import add_description_at_api_tags
 
-__version__ = get_version(
-    root="../", relative_to=__file__
-)  # .git이 있는 폴더를 가리켜야함.
+try:
+    __version__ = get_version(
+        root="../", relative_to=__file__
+    )  # git version (dev version)
+except LookupError:
+    __version__ = "1.0.0"  # production version
 
 
 logger = logging.getLogger(__name__)
