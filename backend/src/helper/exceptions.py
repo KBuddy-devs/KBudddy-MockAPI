@@ -4,17 +4,40 @@
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
 from enum import Enum
+from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from src.schemas import ResponseSchema
+
 
 class ErrorCode(Enum):
-    BAD_REQUEST = ("BAD_REQUEST", "KB-001", 400)
-    UNAUTHORIZED = ("UNAUTHORIZED", "KB-002", 401)
-    FORBIDDEN = ("FORBIDDEN", "KB-003", 403)
-    NOT_FOUND = ("NOT_FOUND", "KB-004", 404)
-    UNKNOWN_ERROR = ("UNKNOWN_ERROR", "KB-005", 500)
-    CONFLICT = ("CONFLICT", "KB-006", 409)
+    # HTTP
+    BAD_REQUEST = ("BAD_REQUEST", "KB-HTTP-001", 400)
+    NOT_FOUND = ("NOT_FOUND", "KB-HTTP-002", 404)
+    METHOD_NOT_ALLOWED = ("METHOD_NOT_ALLOWED", "KB-HTTP-003", 405)
+    NOT_ACCESSABLE = ("NOT_ACCESSABLE", "KB-HTTP-004", 406)
+    TIMEOUT = ("TIMEOUT", "KB-HTTP-005", 408)
+    UNPROCESSABLE = ("UNPROCESSABLE", "KB-HTTP-006", 422)
+    TOO_MANY_REQUEST = ("TOO_MANY_REQUEST", "KB-HTTP-007", 429)
+
+    # DATA
+    CONFLICT = ("CONFLICT", "KB-DATA-001", 409)
+
+    # AUTH
+    UNAUTHORIZED = ("UNAUTHORIZED", "KB-AUTH-001", 401)
+    FORBIDDEN = ("FORBIDDEN", "KB-AUTH-002", 403)
+
+    # SERVER
+    UNKNOWN_ERROR = ("UNKNOWN_ERROR", "KB-SEVR-001", 500)
+    BAD_GATEWAY = ("BAD_GATEWAY", "KB-SEVR-002", 502)
+    SERVICE_UNAVAILABLE = ("SERVICE_UNAVAILABLE", "KB-SEVR-003", 503)
+    GATEWAY_TIMEOUT = ("GATEWAY_TIMEOUT", "KB-SEVR-004", 504)
+
+    def __init__(self, error: str, code: str, status_code: int):
+        self.error = error
+        self.code = code
+        self.status_code = status_code
 
 
 class ExceptionSchema(BaseModel):
@@ -23,33 +46,28 @@ class ExceptionSchema(BaseModel):
         description="에러가 발생한 시간입니다.",
     )
     status: int = Field(..., description="에러의 HTTP status code 입니다.")
-    error: str = Field(
+    code: str = Field(
         ...,
-        description="에러의 이름입니다.",
+        description="에러의 서버 식별 코드입니다.",
     )
     message: str = Field(
         ...,
         description="에러의 메시지 내용입니다.",
-    )
-    errorCode: str = Field(
-        ...,
-        description="에러의 코드입니다.",
     )
     path: str = Field(
         ...,
         description="에러가 발생한 경로입니다.",
     )
 
-    class Config:
+    class ConfigDict:
         json_schema_extra = {
             "example": {
                 "default": {
-                    "timestamp": "2021-10-17T16:55:00.000000Z",
+                    "timestamp": "2023-02-10T01:00:00.000Z",
                     "status": 500,
-                    "error": "INTERNAL_SERVER_ERROR",
-                    "message": "서버 로직에 알 수 없는 오류가 발생했습니다.",
-                    "errorCode": "KB-000",
+                    "code": "KB-SEVR-000",
                     "path": "/v1/<some/endpoint>",
+                    "message": "ERROR : 서버 로직에 알 수 없는 오류가 발생했습니다.",
                 }
             }
         }
@@ -57,5 +75,16 @@ class ExceptionSchema(BaseModel):
 
 class InternalException(Exception):
     def __init__(self, message: str, error_code: ErrorCode):
-        self.message = message
-        self.error_code = error_code
+        self.timestamp = datetime.utcnow().isoformat() + "Z"
+        self.status = error_code.status_code
+        self.error_code = error_code.code
+        self.message = f"ERROR : {message}"
+
+    def to_response(self, path: str) -> ResponseSchema[str]:
+        return ResponseSchema(
+            timestamp=self.timestamp,
+            status=self.status,
+            code=self.error_code,
+            path=path,
+            message=self.message,
+        )

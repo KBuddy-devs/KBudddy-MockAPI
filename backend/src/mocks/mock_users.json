@@ -1,0 +1,47 @@
+[
+  {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "userId": "johnhuh",
+    "email": "kbuddy@gmail.com",
+    "roles": ["NORMAL_USER"],
+    "profileImageUrl": null,
+    "bio": "hello, i'm tony stark.",
+    "firstName": "tony",
+    "lastName": "stark",
+    "gender": "M",
+    "country": "KOREA",
+    "isActive": true,
+    "createdDate": "2024-07-17T12:53:16.707426",
+    "password": "password123"
+  },
+  {
+    "id": "123e4567-e89b-12d3-a456-426614174001",
+    "userId": "janedoe",
+    "email": "janedoe@example.com",
+    "roles": ["ADMIN"],
+    "profileImageUrl": "https://example.com/images/janedoe.png",
+    "bio": "hello, i'm jane doe.",
+    "firstName": "jane",
+    "lastName": "doe",
+    "gender": "F",
+    "country": "USA",
+    "isActive": true,
+    "createdDate": "2023-06-15T09:30:00.000Z",
+    "password": "password123"
+  },
+  {
+    "id": "123e4567-e89b-12d3-a456-426614174002",
+    "userId": "bnbong",
+    "email": "bnbong@example.com",
+    "roles": ["NORMAL_USER"],
+    "profileImageUrl": null,
+    "bio": "this is bnbong~",
+    "firstName": "JunHyeok",
+    "lastName": "Lee",
+    "gender": "M",
+    "country": "KOREA",
+    "isActive": false,
+    "createdDate": "2023-09-01T14:45:00.000Z",
+    "password": "password123"
+  }
+]

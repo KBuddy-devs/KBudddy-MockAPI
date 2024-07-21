@@ -3,18 +3,20 @@
 #
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
-import asyncio
-import pytest
 import pytest_asyncio
 
+from httpx import AsyncClient, ASGITransport
+
+from src import create_app
 from src.core.settings import AppSettings
 
 
 app_settings = AppSettings(_env_file=".env.test")
 
 
-@pytest.fixture(scope="session")
-def event_loop(request):
-    loop = asyncio.get_event_loop_policy().new_event_loop()
-    yield loop
-    loop.close()
+class BaseTestRouter:
+    @pytest_asyncio.fixture(scope="function")
+    async def client(self):
+        app = create_app(app_settings)
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
+            yield c

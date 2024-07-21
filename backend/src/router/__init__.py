@@ -4,11 +4,13 @@
 #
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
+import json
+
 from fastapi import APIRouter
 
 from .user import router as user_router
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix="/kbuddy/v1")
 
 router.include_router(user_router, tags=["user"])
 
@@ -27,3 +29,8 @@ router.include_router(user_router, tags=["user"])
 )
 async def ping():
     return {"ping": "pong"}
+
+
+def load_json(file_path: str):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)

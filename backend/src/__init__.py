@@ -7,12 +7,14 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from setuptools_scm import get_version
 
 from src.core.settings import settings
+from src.helper.exceptions import InternalException
 from src.helper.logging import init_logger as _init_logger
 from src.router import router
 from src.core.settings import AppSettings
@@ -49,6 +51,7 @@ def create_app(app_settings: AppSettings) -> FastAPI:
         redoc_url="/redoc",
     )
 
+    # Apply Middlewares
     if settings.BACKEND_CORS_ORIGINS:
         app.add_middleware(
             CORSMiddleware,
@@ -58,6 +61,14 @@ def create_app(app_settings: AppSettings) -> FastAPI:
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],
+        )
+
+    # Apply Custom Exception Handler
+    @app.exception_handler(InternalException)
+    async def internal_exception_handler(request: Request, exc: InternalException):
+        return JSONResponse(
+            status_code=exc.status,
+            content=exc.to_response(path=str(request.url)).model_dump(),
         )
 
     app.include_router(router)

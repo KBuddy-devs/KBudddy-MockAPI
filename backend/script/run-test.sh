@@ -1,1 +1,2 @@
-python -m pytest -s -v
+# run pytest
+poetry run pytest ../test -s -v

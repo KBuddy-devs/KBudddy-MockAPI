@@ -1,4 +1,4 @@
-# TODO : 스키마 필드 명세에 맞게 수정
+# TODO : JSON 스키마 양식에 맞춰 Pydantic 스키마 수정 (필드 매칭, 대문자 구분 등)
 # --------------------------------------------------------------------------
 # User schemas를 정의한 모듈입니다.
 #
@@ -41,7 +41,6 @@ class UserBase(BaseModel):
         None, title="User's last name", description="유저의 실제 성 입니다."
     )
 
-    # itinerary_requests: Optional[List] = List[ItineraryRequestSchema]
     # listings: Optional[List] = List[ListingSchema]
 
     @field_serializer("password", when_used="json")
@@ -54,8 +53,9 @@ class UserSchema(UserBase):
         ..., title="User's ID (pk)", description="유저의 고유 식별자입니다."
     )
 
-    class Config:
+    class ConfigDict:
         from_attributes = True
+
 
 class UserCreate(UserBase):
     first_name: str = Field(
