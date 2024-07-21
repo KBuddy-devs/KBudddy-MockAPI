@@ -21,7 +21,7 @@ from src.core.settings import AppSettings
 from src.utils.documents import add_description_at_api_tags
 
 __version__ = get_version(
-    root="../../", relative_to=__file__
+    root="../", relative_to=__file__
 )  # .git이 있는 폴더를 가리켜야함.
 
 
