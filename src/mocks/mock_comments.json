@@ -1,0 +1,163 @@
+[
+    {
+        "id": 1,
+        "user_id": "d8f29d6f-9e7a-4c5b-b3e1-5f9d7c8e8b4a",
+        "qna_id": 1001,
+        "description": "To rent an apartment in Seoul, you need to contact a real estate agent, visit the properties, and sign a lease agreement.",
+        "remove": false,
+        "created_at": "2024-07-01T09:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "user_id": "f3d90b78-8e4c-4b7a-9f1b-3e9f6d2c8a6a",
+        "qna_id": 1002,
+        "description": "Haeundae and Gwangan are popular areas for expats in Busan due to their beautiful beaches and amenities.",
+        "remove": false,
+        "created_at": "2024-07-02T10:45:00.000Z"
+    },
+    {
+        "id": 3,
+        "user_id": "e2c70a69-4c1f-4a8b-9d1f-2f4e8d3c9b5b",
+        "qna_id": 1003,
+        "description": "Get a T-money card for convenient payment on buses and subways. Also, download the KakaoMap app for easy navigation.",
+        "remove": false,
+        "created_at": "2024-07-03T13:15:00.000Z"
+    },
+    {
+        "id": 4,
+        "user_id": "d5e70d81-7e3b-4a7a-9b5c-3f8e7b5e8a4c",
+        "qna_id": 1004,
+        "description": "Try 'Loving Hut' and 'Plant Cafe' for great vegan food options in Seoul.",
+        "remove": true,
+        "created_at": "2024-07-04T15:00:00.000Z"
+    },
+    {
+        "id": 5,
+        "user_id": "f6d90b90-8e2d-4c7a-b3f2-2f7b7c9e8a4b",
+        "qna_id": 1005,
+        "description": "Foreigners can use the National Health Insurance Service (NHIS) or visit international clinics in Seoul for healthcare services.",
+        "remove": false,
+        "created_at": "2024-07-05T16:30:00.000Z"
+    },
+    {
+        "id": 6,
+        "user_id": "e7c80d41-4c3e-4a9b-9d5f-2f5e8b4d9a7a",
+        "qna_id": 1006,
+        "description": "Seoul National University, Yonsei University, and Korea University are top choices for exchange students.",
+        "remove": false,
+        "created_at": "2024-07-06T10:00:00.000Z"
+    },
+    {
+        "id": 7,
+        "user_id": "d8e70a52-6e2f-4a9a-9b4f-3e7f8d3c9b5c",
+        "qna_id": 1007,
+        "description": "Check online job portals like Saramin and JobKorea. Networking and language skills are also important.",
+        "remove": false,
+        "created_at": "2024-07-07T11:45:00.000Z"
+    },
+    {
+        "id": 8,
+        "user_id": "f9d80b63-7e4d-4c7a-b3e3-4f9e7d2c8a5b",
+        "qna_id": 1008,
+        "description": "Respect for elders, removing shoes indoors, and using both hands when giving or receiving items are important cultural norms.",
+        "remove": true,
+        "created_at": "2024-07-08T14:15:00.000Z"
+    },
+    {
+        "id": 9,
+        "user_id": "e0c90a84-5c2f-4a7a-9d6f-2f4b8d3e9b6a",
+        "qna_id": 1009,
+        "description": "Visit Jeju Island, Gyeongju, and the DMZ for some of the best travel experiences in Korea.",
+        "remove": false,
+        "created_at": "2024-07-09T16:00:00.000Z"
+    },
+    {
+        "id": 10,
+        "user_id": "d1e10d95-6c1f-4a9a-8b3f-3e9b7d5e8a4c",
+        "qna_id": 1010,
+        "description": "For any other questions, feel free to reach out to local expat communities or support groups.",
+        "remove": false,
+        "created_at": "2024-07-10T17:30:00.000Z"
+    },
+    {
+        "id": 11,
+        "user_id": "b9a30e81-4d2f-4c7a-b1f3-2e8f7d1c8a5b",
+        "qna_id": 1001,
+        "description": "Make sure to have all your documents ready, including your ARC, employment contract, and proof of income.",
+        "remove": false,
+        "created_at": "2024-07-01T10:00:00.000Z"
+    },
+    {
+        "id": 12,
+        "user_id": "c0b20a92-5e4f-4a8b-9d1f-3f8d7c9e9b6c",
+        "qna_id": 1002,
+        "description": "I also recommend Seomyeon area for its vibrant nightlife and accessibility.",
+        "remove": false,
+        "created_at": "2024-07-02T11:45:00.000Z"
+    },
+    {
+        "id": 13,
+        "user_id": "d1c90b63-6c3f-4a9a-8b2f-2e9d8b5e7a5c",
+        "qna_id": 1003,
+        "description": "Avoid peak hours if possible, as public transport can get very crowded.",
+        "remove": false,
+        "created_at": "2024-07-03T14:15:00.000Z"
+    },
+    {
+        "id": 14,
+        "user_id": "e2a80b74-7d1f-4c8a-b3e3-3e8f9d6c8a6a",
+        "qna_id": 1004,
+        "description": "There are also many vegan options in Itaewon and Gangnam.",
+        "remove": false,
+        "created_at": "2024-07-04T16:00:00.000Z"
+    },
+    {
+        "id": 15,
+        "user_id": "f3c90d85-8e2f-4a7a-9d5f-4f8e7c9e9a6b",
+        "qna_id": 1005,
+        "description": "Check out the international clinics in Itaewon for English-speaking doctors.",
+        "remove": false,
+        "created_at": "2024-07-05T17:30:00.000Z"
+    },
+    {
+        "id": 16,
+        "user_id": "a4b90e76-9e4f-4b7a-8f2f-2f8b7d5c8a4a",
+        "qna_id": 1006,
+        "description": "Don't forget to apply for scholarships, as many universities offer them to international students.",
+        "remove": false,
+        "created_at": "2024-07-06T11:00:00.000Z"
+    },
+    {
+        "id": 17,
+        "user_id": "b5c80a87-0f1f-4a8a-9b3e-3e9d7c8e9b5b",
+        "qna_id": 1007,
+        "description": "Knowing Korean can significantly improve your chances of finding a job.",
+        "remove": false,
+        "created_at": "2024-07-07T12:45:00.000Z"
+    },
+    {
+        "id": 18,
+        "user_id": "c6b90c98-1e2f-4b7a-9d5f-4f7d8c5e8a6c",
+        "qna_id": 1008,
+        "description": "It's also important to understand the concept of 'Jeong' in Korean culture.",
+        "remove": false,
+        "created_at": "2024-07-08T15:15:00.000Z"
+    },
+    {
+        "id": 19,
+        "user_id": "d7a80d09-2f3f-4a8a-9b2f-5f8e7d9e8b7d",
+        "qna_id": 1009,
+        "description": "Don't miss the cherry blossoms in spring at Yeouido Park.",
+        "remove": false,
+        "created_at": "2024-07-09T17:00:00.000Z"
+    },
+    {
+        "id": 20,
+        "user_id": "e8b70e1a-3e4f-4a7a-8d3e-6f9e8b5e9a7a",
+        "qna_id": 1010,
+        "description": "You can also join local expat Facebook groups for more information.",
+        "remove": false,
+        "created_at": "2024-07-10T18:30:00.000Z"
+    }
+]
+

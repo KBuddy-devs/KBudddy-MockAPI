@@ -1,1 +1,112 @@
-[]
+[
+  {
+    "id": 1001,
+    "writer_id": "e8f47a10-0e60-4c35-b1b7-60d940d8a0f5",
+    "category_id": 1,
+    "title": "How to rent an apartment in Seoul?",
+    "description": "What are the steps to rent an apartment in Seoul?",
+    "view_count": 150,
+    "created_at": "2024-07-01T08:30:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1002,
+    "writer_id": "a3b02d18-75c4-42a2-b3d3-90f1f7e2a71d",
+    "category_id": 2,
+    "title": "Best areas to live in Busan?",
+    "description": "Which areas in Busan are recommended for expats?",
+    "view_count": 200,
+    "created_at": "2024-07-02T10:15:00.000Z",
+    "remove": false,
+    "modified_at": "2024-07-12T12:00:00.000Z"
+  },
+  {
+    "id": 1003,
+    "writer_id": "c8f07b92-3e00-4987-9f44-0c9c1b8c5f5a",
+    "category_id": 3,
+    "title": "Public transportation tips?",
+    "description": "Any tips for using public transportation in Korea?",
+    "view_count": 120,
+    "created_at": "2024-07-03T12:45:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1004,
+    "writer_id": "d4f29d7f-84f4-4b89-bf4e-9071a3c6d7a9",
+    "category_id": 4,
+    "title": "Where to find vegan food?",
+    "description": "Are there good vegan restaurants in Seoul?",
+    "view_count": 180,
+    "created_at": "2024-07-04T14:20:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1005,
+    "writer_id": "b1a20e9a-6f4b-4b2b-9f22-2e3b4d2e2c23",
+    "category_id": 5,
+    "title": "Healthcare options for foreigners?",
+    "description": "What healthcare options are available for foreigners in Korea?",
+    "view_count": 300,
+    "created_at": "2024-07-05T16:00:00.000Z",
+    "remove": true,
+    "modified_at": null
+  },
+  {
+    "id": 1006,
+    "writer_id": "f9b12d35-8c3d-4e7e-9f77-4f6c8e9b6e7a",
+    "category_id": 6,
+    "title": "Best universities for exchange students?",
+    "description": "Which universities in Korea are best for exchange students?",
+    "view_count": 250,
+    "created_at": "2024-07-06T09:30:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1007,
+    "writer_id": "e1d90a72-0e59-487c-8f77-2c9b2d3d1d1e",
+    "category_id": 7,
+    "title": "Finding a job in Korea?",
+    "description": "How can I find a job in Korea as a foreigner?",
+    "view_count": 220,
+    "created_at": "2024-07-07T11:15:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1008,
+    "writer_id": "d3b80a41-5e2d-4a9a-b8b3-0f1f6e2e6a5c",
+    "category_id": 8,
+    "title": "Cultural norms to be aware of?",
+    "description": "What are some cultural norms in Korea that expats should be aware of?",
+    "view_count": 175,
+    "created_at": "2024-07-08T13:45:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1009,
+    "writer_id": "c2e60c78-1e4c-41a2-9f3b-1b7f7d0e6b4a",
+    "category_id": 9,
+    "title": "Top travel destinations in Korea?",
+    "description": "What are the top travel destinations in Korea?",
+    "view_count": 140,
+    "created_at": "2024-07-09T15:20:00.000Z",
+    "remove": false,
+    "modified_at": null
+  },
+  {
+    "id": 1010,
+    "writer_id": "b9f30d59-9e3a-4b6b-9f12-0e4b7d2d5e3a",
+    "category_id": 10,
+    "title": "Miscellaneous inquiries?",
+    "description": "I have other questions about living in Korea.",
+    "view_count": 160,
+    "created_at": "2024-07-10T17:00:00.000Z",
+    "remove": true,
+    "modified_at": null
+  }
+]
