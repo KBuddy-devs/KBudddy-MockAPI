@@ -47,7 +47,6 @@ class TestUserAPI(BaseTestRouter):
         assert "ERROR : 해당 유저를 찾을 수 없습니다." in json_response["message"]
 
 
-
 #     async def test_create_user(self, client):
 #         # given
 #         data = {"email": "test@example.com", "password": "password"}

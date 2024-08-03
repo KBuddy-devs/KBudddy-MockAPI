@@ -18,5 +18,7 @@ class BaseTestRouter:
     @pytest_asyncio.fixture(scope="function")
     async def client(self):
         app = create_app(app_settings)
-        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url="http://test"
+        ) as c:
             yield c

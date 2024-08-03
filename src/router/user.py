@@ -3,14 +3,9 @@
 #
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
-from uuid import UUID
-from datetime import datetime
-
-from fastapi import APIRouter, status, Request
-from fastapi.responses import JSONResponse
+from . import *
 
 from src.crud.user import get_mock_user_data
-from src.helper.exceptions import InternalException
 from src.schemas import ResponseSchema
 from src.schemas.user import UserSchema
 
@@ -51,7 +46,8 @@ async def get_user_route(id: UUID, request: Request):
         return response
     except InternalException as e:
         return JSONResponse(
-            status_code=e.status, content=e.to_response(path=str(request.url)).model_dump()
+            status_code=e.status,
+            content=e.to_response(path=str(request.url)).model_dump(),
         )
 
 
