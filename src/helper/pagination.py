@@ -11,7 +11,9 @@ T = TypeVar("T")
 
 
 class PaginatedResponse(BaseModel, Generic[T]):
-    count: int = Field(..., title="Count", description="불러온 아이템 전체 개수를 나타냅니다.")
+    count: int = Field(
+        ..., title="Count", description="불러온 아이템 전체 개수를 나타냅니다."
+    )
     next: Optional[AnyHttpUrl] = Field(
         None,
         title="Next",
@@ -52,7 +54,7 @@ class Paginator:
         return str(url)
 
     def get_response(self) -> dict:
-        paginated_data = self.data[self.offset:self.offset + self.limit]
+        paginated_data = self.data[self.offset : self.offset + self.limit]
         return {
             "count": len(self.data),
             "next": self._get_next_page(),

@@ -1,9 +1,10 @@
+# TODO : 단일 질문 좋아요 라우터 검증, 질문 좋아요 삭제 및 댓글 CUD 라우터 추가
 # --------------------------------------------------------------------------
 # QnA router을 정의한 모듈입니다.
 #
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
-from fastapi import Query
+from fastapi import Query, Depends
 
 from . import *
 
@@ -11,8 +12,9 @@ from src.schemas import ResponseSchema
 
 from src import mock_qna_data
 from src.crud.qna import get_mock_qna_data_schema, get_mock_qna_data
-from src.schemas.qna import QnASchema, QnACreate, QnAUpdate
+from src.schemas.qna import QnASchema, QnACreate, QnAUpdate, QnALike
 from src.helper.pagination import PaginatedResponse, paginate
+from ._check import check_user
 
 router = APIRouter(
     prefix="/qna",
@@ -21,7 +23,7 @@ router = APIRouter(
 
 def generate_new_id():
     if mock_qna_data:
-        return max(_qna['id'] for _qna in mock_qna_data) + 1
+        return max(_qna["id"] for _qna in mock_qna_data) + 1
     return 1
 
 
@@ -45,7 +47,8 @@ async def create_qna_route(data: QnACreate, request: Request):
         "remove": False,
         "file": data.file,
         "comments": [],
-        "likes": 0
+        "likeCount": 0,
+        "likes": [],
     }
     mock_qna_data.append(new_qna)
     response = ResponseSchema(
@@ -53,7 +56,7 @@ async def create_qna_route(data: QnACreate, request: Request):
         status=201,
         code="KB-HTTP-201",
         path=str(request.url),
-        message=QnASchema(**new_qna)
+        message=QnASchema(**new_qna),
     )
     return response
 
@@ -76,7 +79,7 @@ async def list_qna_route(
         status=200,
         code="KB-HTTP-200",
         path=str(request.url),
-        message=paginated_response
+        message=paginated_response,
     )
     return response
 
@@ -111,7 +114,7 @@ async def get_qna_route(id: int, request: Request):
     summary="단일 질문 정보 수정",
     description="특정 질문에 대한 정보를 수정합니다.",
     status_code=status.HTTP_200_OK,
-    response_model=ResponseSchema[QnASchema]
+    response_model=ResponseSchema[QnASchema],
 )
 async def update_qna_route(id: int, data: QnAUpdate, request: Request):
     try:
@@ -124,7 +127,7 @@ async def update_qna_route(id: int, data: QnAUpdate, request: Request):
             status=200,
             code="KB-HTTP-200",
             path=str(request.url),
-            message=QnASchema(**qna)
+            message=QnASchema(**qna),
         )
         return response
     except InternalException as e:
@@ -149,12 +152,42 @@ async def delete_qna_route(id: int, request: Request):
             status=204,
             code="KB-HTTP-204",
             path=str(request.url),
-            message={"detail": "QnA deleted successfully"}
+            message={"detail": "QnA deleted successfully"},
         )
         return JSONResponse(
-            status_code=status.HTTP_204_NO_CONTENT,
-            content=response.dict()
+            status_code=status.HTTP_204_NO_CONTENT, content=response.dict()
         )
+    except InternalException as e:
+        return JSONResponse(
+            status_code=e.status,
+            content=e.to_response(path=str(request.url)).model_dump(),
+        )
+
+
+@router.post(
+    "/{id}/like",
+    summary="단일 질문 좋아요",
+    description="특정 질문에 좋아요를 표시합니다.",
+    status_code=status.HTTP_202_ACCEPTED,
+    response_model=ResponseSchema[QnASchema],
+)
+async def like_qna_route(
+    id: int, request: Request, request_user: str = Depends(check_user)
+):
+    try:
+        qna = get_mock_qna_data(id)
+        if not any(like['userId'] == request_user for like in qna.likes):
+            qna.likes.append({"userId": request_user})
+            qna.likeCount += 1
+        mock_qna_data[mock_qna_data.index(qna)] = qna.dict()
+        response = ResponseSchema(
+            timestamp=datetime.utcnow().isoformat() + "Z",
+            status=200,
+            code="KB-HTTP-200",
+            path=str(request.url),
+            message=QnASchema(**qna.dict()),
+        )
+        return response
     except InternalException as e:
         return JSONResponse(
             status_code=e.status,

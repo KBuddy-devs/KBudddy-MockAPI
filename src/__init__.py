@@ -43,7 +43,6 @@ async def lifespan(app: FastAPI):
 
         logger.info("Init mock data at memory")
         initialize_mock_qna_data()
-        print(mock_qna_data)  # for debugging
         yield
     finally:
         logger.info("Application shutdown")

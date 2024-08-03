@@ -8,8 +8,7 @@
     "viewCount": 150,
     "createdAt": "2024-07-01T08:30:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-01T08:30:00.000Z",
-    "likes": 10
+    "modifiedAt": "2024-07-01T08:30:00.000Z"
   },
   {
     "id": 1002,
@@ -20,8 +19,7 @@
     "viewCount": 200,
     "createdAt": "2024-07-02T10:15:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-12T12:00:00.000Z",
-    "likes": 3
+    "modifiedAt": "2024-07-12T12:00:00.000Z"
   },
   {
     "id": 1003,
@@ -32,8 +30,7 @@
     "viewCount": 120,
     "createdAt": "2024-07-03T12:45:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-03T12:45:00.000Z",
-    "likes": 5
+    "modifiedAt": "2024-07-03T12:45:00.000Z"
   },
   {
     "id": 1004,
@@ -44,8 +41,7 @@
     "viewCount": 180,
     "createdAt": "2024-07-04T14:20:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-04T14:20:00.000Z",
-    "likes": 4
+    "modifiedAt": "2024-07-04T14:20:00.000Z"
   },
   {
     "id": 1005,
@@ -56,8 +52,7 @@
     "viewCount": 300,
     "createdAt": "2024-07-05T16:00:00.000Z",
     "remove": true,
-    "modifiedAt": "2024-07-05T16:00:00.000Z",
-    "likes": 6
+    "modifiedAt": "2024-07-05T16:00:00.000Z"
   },
   {
     "id": 1006,
@@ -68,8 +63,7 @@
     "viewCount": 250,
     "createdAt": "2024-07-06T09:30:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-06T09:30:00.000Z",
-    "likes": 0
+    "modifiedAt": "2024-07-06T09:30:00.000Z"
   },
   {
     "id": 1007,
@@ -80,8 +74,7 @@
     "viewCount": 220,
     "createdAt": "2024-07-07T11:15:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-07T11:15:00.000Z",
-    "likes": 1
+    "modifiedAt": "2024-07-07T11:15:00.000Z"
   },
   {
     "id": 1008,
@@ -92,8 +85,7 @@
     "viewCount": 175,
     "createdAt": "2024-07-08T13:45:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-08T13:45:00.000Z",
-    "likes": 8
+    "modifiedAt": "2024-07-08T13:45:00.000Z"
   },
   {
     "id": 1009,
@@ -104,8 +96,7 @@
     "viewCount": 140,
     "createdAt": "2024-07-09T15:20:00.000Z",
     "remove": false,
-    "modifiedAt": "2024-07-09T15:20:00.000Z",
-    "likes": 10
+    "modifiedAt": "2024-07-09T15:20:00.000Z"
   },
   {
     "id": 1010,
@@ -116,7 +107,6 @@
     "viewCount": 160,
     "createdAt": "2024-07-10T17:00:00.000Z",
     "remove": true,
-    "modifiedAt": "2024-07-10T17:00:00.000Z",
-    "likes": 0
+    "modifiedAt": "2024-07-10T17:00:00.000Z"
   }
 ]

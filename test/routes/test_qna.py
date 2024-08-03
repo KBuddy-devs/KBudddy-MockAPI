@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------
-# User의 testcase를 정의한 모듈입니다.
+# QnA의 testcase를 정의한 모듈입니다.
 #
 # @author bnbong bbbong9@gmail.com
 # --------------------------------------------------------------------------
@@ -16,23 +16,24 @@ class TestQnAAPI(BaseTestRouter):
     @pytest_asyncio.fixture(autouse=True)
     async def setup(self, client):
         mock_qna_data.clear()
-        mock_qna_data.extend([
-            {
-                "id": 1,
-                "writerId": "123e4567-e89b-12d3-a456-426614174000",
-                "categoryId": 1,
-                "title": "Test QnA",
-                "description": "Test QnA Description",
-                "viewCount": 0,
-                "createdAt": "2024-07-21T00:00:00.000Z",
-                "modifiedAt": "2024-07-21T00:00:00.000Z",
-                "remove": False,
-                "file": [],
-                "comments": [],
-                "likes": 0
-            }
-        ])
-        print(mock_qna_data)
+        mock_qna_data.extend(
+            [
+                {
+                    "id": 1,
+                    "writerId": "123e4567-e89b-12d3-a456-426614174000",
+                    "categoryId": 1,
+                    "title": "Test QnA",
+                    "description": "Test QnA Description",
+                    "viewCount": 0,
+                    "createdAt": "2024-07-21T00:00:00.000Z",
+                    "modifiedAt": "2024-07-21T00:00:00.000Z",
+                    "remove": False,
+                    "file": [],
+                    "comments": [],
+                    "likes": 0,
+                }
+            ]
+        )
 
     @pytest.mark.asyncio
     async def test_create_qna(self, client):
@@ -42,7 +43,7 @@ class TestQnAAPI(BaseTestRouter):
             "categoryId": 2,
             "title": "New QnA",
             "description": "New QnA Description",
-            "file": []
+            "file": [],
         }
 
         # when
@@ -61,7 +62,7 @@ class TestQnAAPI(BaseTestRouter):
         response = await client.get("/kbuddy/v1/qna/")
 
         # then
-        print(response)
+        print(response.json())
         assert response.status_code == 200
         assert response.json()["message"]["count"] == 1
 
@@ -79,9 +80,7 @@ class TestQnAAPI(BaseTestRouter):
     @pytest.mark.asyncio
     async def test_update_qna(self, client):
         # given
-        data = {
-            "title": "Updated QnA Title"
-        }
+        data = {"title": "Updated QnA Title"}
 
         # when
         response = await client.patch("/kbuddy/v1/qna/1", json=data)
