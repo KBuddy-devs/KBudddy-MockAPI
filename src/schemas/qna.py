@@ -12,7 +12,7 @@ from uuid import UUID
 class FileSchema(BaseModel):
     id: int = Field(..., title="File ID", description="파일의 고유 식별자입니다.")
     type: str = Field(..., title="File Type", description="파일의 유형입니다.")
-    name: str = Field(..., title="File Name", description="파일의 이름입니다.")  # TODO : url로 수정할 것
+    url: str = Field(..., title="File Name", description="파일의 이름입니다.")  # TODO : url로 수정할 것
 
 
 class CommentSchema(BaseModel):
