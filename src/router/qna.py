@@ -16,7 +16,7 @@ from src.schemas.qna import (
     QnACreate,
     QnAUpdate,
     CommentUpdate,
-    CommentCreate,
+    CommentCreate, CommentSchema,
 )
 from src.helper.pagination import PaginatedResponse, paginate
 from src.helper.exceptions import ErrorCode
@@ -215,8 +215,8 @@ async def like_qna_route(
 
 @router.delete(
     "/{id}/like",
-    summary="단일 질문 좋아요 취소",
-    description="특정 질문에 대한 좋아요를 취소합니다.",
+    summary="단일 질문 좋아요 해제",
+    description="특정 질문에 표시했던 좋아요를 삭제합니다.",
     status_code=status.HTTP_202_ACCEPTED,
     response_model=ResponseSchema[QnASchema],
 )
@@ -246,9 +246,41 @@ async def unlike_qna_route(
         )
 
 
+@router.get(
+    "/{id}/comment/list",
+    summary="단일 질문 댓글 리스트 조회",
+    description="특정 질문에 게시되어 있는 모든 댓글들을 조회합니다.",
+    status_code=status.HTTP_200_OK,
+    response_model=ResponseSchema[PaginatedResponse[CommentSchema]],
+)
+async def list_comments_route(
+    id: int,
+    request: Request,
+    page: int = Query(1, ge=1, description="Page number"),
+    page_size: int = Query(10, ge=1, le=100, description="Number of items per page"),
+):
+    try:
+        qna = get_mock_qna_data(id)
+        comments = qna["comments"]
+        paginated_response = paginate(comments, page, page_size, request)
+        response = ResponseSchema(
+            timestamp=datetime.utcnow().isoformat() + "Z",
+            status=200,
+            code="KB-HTTP-200",
+            path=str(request.url),
+            message=paginated_response,
+        )
+        return response
+    except InternalException as e:
+        return JSONResponse(
+            status_code=e.status,
+            content=e.to_response(path=str(request.url)).model_dump(),
+        )
+
+
 @router.post(
     "/{id}/comment",
-    summary="단일 질문에 댓글 추가",
+    summary="단일 질문 댓글 추가",
     description="특정 질문에 댓글을 추가합니다.",
     status_code=status.HTTP_201_CREATED,
     response_model=ResponseSchema[QnASchema],

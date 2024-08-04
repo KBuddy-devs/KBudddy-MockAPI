@@ -36,6 +36,25 @@ class TestQnAAPI(BaseTestRouter):
                 }
             ]
         )
+        mock_comment_data.extend(
+            [
+                {
+                    "id": 1,
+                    "userId": "123e4567-e89b-12d3-a456-426614174001",
+                    "qnaId": 1,
+                    "description": "Test Comment 1",
+                    "createdAt": "2024-07-21T01:00:00.000Z",
+                },
+                {
+                    "id": 2,
+                    "userId": "123e4567-e89b-12d3-a456-426614174002",
+                    "qnaId": 1,
+                    "description": "Test Comment 2",
+                    "createdAt": "2024-07-21T02:00:00.000Z",
+                }
+            ]
+        )
+        mock_qna_data[0]["comments"].extend(mock_comment_data)
 
     @pytest.mark.asyncio
     async def test_create_qna(self, client):
@@ -131,6 +150,19 @@ class TestQnAAPI(BaseTestRouter):
         assert response.json()["message"]["likeCount"] == 0
 
     @pytest.mark.asyncio
+    async def test_list_comments(self, client):
+        # given
+        headers = {"user_pk": "123e4567-e89b-12d3-a456-426614174000"}
+
+        # when
+        response = await client.get("/kbuddy/v1/qna/1/comment/list?page=1&page_size=10", headers=headers)
+
+        # then
+        assert response.status_code == 200
+        assert response.json()["message"]["count"] == 2
+        assert len(response.json()["message"]["results"]) == 2
+
+    @pytest.mark.asyncio
     async def test_add_comment(self, client):
         # given
         data = {"description": "New Comment"}
@@ -143,49 +175,50 @@ class TestQnAAPI(BaseTestRouter):
 
         # then
         assert response.status_code == 201
-        assert (
-            response.json()["message"]["comments"][0]["description"]
-            == data["description"]
-        )
-        assert len(mock_comment_data) == 1
+        assert response.json()["message"]["comments"][2]["description"] == data["description"]
+        assert len(mock_comment_data) == 3
 
     @pytest.mark.asyncio
     async def test_update_comment(self, client):
         # given
-        headers = {"user_pk": "123e4567-e89b-12d3-a456-426614174009"}
-        comment_data = {"description": "New Comment"}
-        await client.post(
-            "/kbuddy/v1/qna/1/comment", json=comment_data, headers=headers
-        )
-
-        update_data = {"description": "Updated Comment"}
+        mock_comment_data.append({
+            "id": 3,
+            "userId": "123e4567-e89b-12d3-a456-426614174001",
+            "qnaId": 1,
+            "description": "Test Comment",
+            "remove": False,
+            "createdAt": "2024-07-21T00:00:00.000Z",
+        })
+        mock_qna_data[0]["comments"].append(mock_comment_data[2])
+        data = {"description": "Updated Comment"}
+        headers = {"user_pk": "123e4567-e89b-12d3-a456-426614174001"}
 
         # when
-        response = await client.patch(
-            "/kbuddy/v1/qna/1/comment/1", json=update_data, headers=headers
-        )
+        response = await client.patch(f"/kbuddy/v1/qna/1/comment/3", json=data, headers=headers)
 
         # then
         assert response.status_code == 200
-        assert (
-            response.json()["message"]["comments"][0]["description"]
-            == update_data["description"]
-        )
-        assert mock_comment_data[0]["description"] == update_data["description"]
+        assert response.json()["message"]["comments"][2]["description"] == data["description"]
+        assert mock_comment_data[2]["description"] == data["description"]
 
     @pytest.mark.asyncio
     async def test_delete_comment(self, client):
         # given
-        headers = {"user_pk": "123e4567-e89b-12d3-a456-426614174009"}
-        comment_data = {"description": "New Comment"}
-        await client.post(
-            "/kbuddy/v1/qna/1/comment", json=comment_data, headers=headers
-        )
+        mock_comment_data.append({
+            "id": 3,
+            "userId": "123e4567-e89b-12d3-a456-426614174001",
+            "qnaId": 1,
+            "description": "Test Comment",
+            "remove": False,
+            "createdAt": "2024-07-21T00:00:00.000Z",
+        })
+        mock_qna_data[0]["comments"].append(mock_comment_data[2])
+        headers = {"user_pk": "123e4567-e89b-12d3-a456-426614174001"}
 
         # when
-        response = await client.delete("/kbuddy/v1/qna/1/comment/1", headers=headers)
+        response = await client.delete(f"/kbuddy/v1/qna/1/comment/3", headers=headers)
 
         # then
         assert response.status_code == 204
-        assert len(mock_comment_data) == 0
-        assert len(mock_qna_data[0]["comments"]) == 0
+        assert len(mock_qna_data[0]["comments"]) == 2
+        assert len(mock_comment_data) == 2
