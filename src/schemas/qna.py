@@ -12,9 +12,7 @@ from uuid import UUID
 class FileSchema(BaseModel):
     id: int = Field(..., title="File ID", description="파일의 고유 식별자입니다.")
     type: str = Field(..., title="File Type", description="파일의 유형입니다.")
-    url: str = Field(
-        ..., title="File Name", description="파일의 이름입니다."
-    )  # TODO : url로 수정할 것
+    url: str = Field(..., title="File Name", description="파일의 이름입니다.")
 
 
 class CommentSchema(BaseModel):
@@ -24,13 +22,24 @@ class CommentSchema(BaseModel):
     )
     qnaId: int = Field(..., title="QnA ID", description="QnA의 고유 식별자입니다.")
     description: str = Field(..., title="Description", description="댓글 내용입니다.")
-    remove: bool = Field(..., title="Remove", description="삭제 여부입니다.")
     createdAt: datetime = Field(
         ..., title="Created At", description="댓글 작성 날짜입니다."
     )
 
     class ConfigDict:
         from_attributes = True
+
+
+class CommentCreate(BaseModel):
+    description: str = Field(
+        ..., title="Comment Description", description="댓글 내용입니다."
+    )
+
+
+class CommentUpdate(BaseModel):
+    description: Optional[str] = Field(
+        None, title="Comment Description", description="댓글 내용입니다."
+    )
 
 
 class QnALike(BaseModel):
@@ -71,9 +80,6 @@ class QnASchema(BaseModel):
 
 
 class QnACreate(BaseModel):
-    writerId: UUID = Field(
-        ..., title="Writer ID", description="작성자의 고유 식별자입니다."
-    )
     categoryId: int = Field(
         ..., title="Category ID", description="카테고리의 고유 식별자입니다."
     )
