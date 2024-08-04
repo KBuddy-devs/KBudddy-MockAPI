@@ -6,6 +6,13 @@
 # --------------------------------------------------------------------------
 from __future__ import annotations
 
+import json
+
 from typing import Any, Type, List, Optional
 
 from pydantic import BaseModel
+
+
+def load_json(file_path: str):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)

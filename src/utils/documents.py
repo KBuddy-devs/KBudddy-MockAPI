@@ -8,7 +8,8 @@ from fastapi import FastAPI
 
 def add_description_at_api_tags(app: FastAPI):
     tag_descriptions = {
-        "user": "User API. 회원 로그인, 로그아웃, 정보 조회 및 수정 등을 수행합니다."
+        "user": "(유지보수 작업중, 사용 X) User API. 회원 로그인, 로그아웃, 정보 조회 및 수정 등을 수행합니다.",
+        "qna": "QnA API. 질문 및 댓글 컨텐츠를 생성, 수정, 조회, 삭제할 수 있으며 좋아요 동작을 수행합니다."
     }
 
     # OpenAPI 태그별 description 생성

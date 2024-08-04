@@ -14,6 +14,11 @@ from contextlib import asynccontextmanager
 from setuptools_scm import get_version
 
 from src.core.settings import settings
+from src.helper.global_data import (
+    initialize_mock_qna_data,
+    mock_qna_data,
+    mock_comment_data,
+)
 from src.helper.exceptions import InternalException
 from src.helper.logging import init_logger as _init_logger
 from src.router import router
@@ -39,6 +44,9 @@ def init_logger(app_settings: AppSettings) -> None:
 async def lifespan(app: FastAPI):
     try:
         logger.info("Application startup")
+
+        logger.info("Init mock data at memory")
+        initialize_mock_qna_data()
         yield
     finally:
         logger.info("Application shutdown")

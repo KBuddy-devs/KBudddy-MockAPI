@@ -6,13 +6,21 @@
 # --------------------------------------------------------------------------
 import json
 
-from fastapi import APIRouter
+from uuid import UUID
+from datetime import datetime
+
+from fastapi import APIRouter, status, Request
+from fastapi.responses import JSONResponse
+
+from src.helper.exceptions import InternalException
 
 from .user import router as user_router
+from .qna import router as qna_router
 
 router = APIRouter(prefix="/kbuddy/v1")
 
 router.include_router(user_router, tags=["user"])
+router.include_router(qna_router, tags=["qna"])
 
 
 @router.get(
