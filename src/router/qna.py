@@ -53,30 +53,33 @@ def generate_new_comment_id():
 async def create_qna_route(
     data: QnACreate, request: Request, request_user: str = Depends(check_user)
 ):
-    new_qna = {
-        "id": generate_new_qna_id(),
-        "writerId": request_user,
-        "categoryId": data.categoryId,
-        "title": data.title,
-        "description": data.description,
-        "viewCount": 0,
-        "createdAt": datetime.utcnow().isoformat() + "Z",
-        "modifiedAt": datetime.utcnow().isoformat() + "Z",
-        "remove": False,
-        "file": data.file,
-        "comments": [],
-        "likeCount": 0,
-        "likes": [],
-    }
-    mock_qna_data.append(new_qna)
-    response = ResponseSchema(
-        timestamp=datetime.utcnow().isoformat() + "Z",
-        status=201,
-        code="KB-HTTP-201",
-        path=str(request.url),
-        message=QnASchema(**new_qna),
-    )
-    return response
+    try:
+        new_qna = {
+            "id": generate_new_qna_id(),
+            "writerId": request_user,
+            "categoryId": data.categoryId,
+            "title": data.title,
+            "description": data.description,
+            "viewCount": 0,
+            "createdAt": datetime.utcnow().isoformat() + "Z",
+            "modifiedAt": datetime.utcnow().isoformat() + "Z",
+            "remove": False,
+            "file": data.file,
+            "comments": [],
+            "likeCount": 0,
+            "likes": [],
+        }
+        mock_qna_data.append(new_qna)
+        response = ResponseSchema(
+            timestamp=datetime.utcnow().isoformat() + "Z",
+            status=201,
+            code="KB-HTTP-201",
+            path=str(request.url),
+            message=QnASchema(**new_qna),
+        )
+        return response
+    except InternalException as e:
+        return e.to_response(path=str(request.url))
 
 
 @router.get(

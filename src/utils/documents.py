@@ -7,31 +7,29 @@ from typing import Callable
 
 from fastapi import FastAPI
 
+from src.helper.exceptions import ExceptionSchema
 
+examples = ExceptionSchema.model_config["json_schema_extra"]["examples"]
 responses = {
     400: {
+        "model": ExceptionSchema,
         "description": "Bad Request",
-        "content": {
-            "application/json": {"example": {"id": "bar", "value": "The bar tenders"}}
-        },
+        "content": {"application/json": {"example": examples[1]}}
     },
     401: {
+        "model": ExceptionSchema,
         "description": "Unauthorized",
-        "content": {
-            "application/json": {"example": {"id": "bar", "value": "The bar tenders"}}
-        },
+        "content": {"application/json": {"example": examples[2]}}
     },
     403: {
+        "model": ExceptionSchema,
         "description": "Forbidden",
-        "content": {
-            "application/json": {"example": {"id": "bar", "value": "The bar tenders"}}
-        },
+        "content": {"application/json": {"example": examples[3]}}
     },
     404: {
+        "model": ExceptionSchema,
         "description": "Not Found",
-        "content": {
-            "application/json": {"example": {"id": "bar", "value": "The bar tenders"}}
-        },
+        "content": {"application/json": {"example": examples[4]}}
     },
 }
 

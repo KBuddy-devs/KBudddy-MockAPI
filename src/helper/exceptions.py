@@ -6,7 +6,7 @@
 from enum import Enum
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 from src.schemas import ResponseSchema
 
@@ -59,18 +59,47 @@ class ExceptionSchema(BaseModel):
         description="에러가 발생한 경로입니다.",
     )
 
-    class ConfigDict:
-        json_schema_extra = {
-            "example": {
-                "default": {
+    model_config = ConfigDict(
+        json_schema_extra={
+            "examples": [
+                {
                     "timestamp": "2023-02-10T01:00:00.000Z",
                     "status": 500,
                     "code": "KB-SEVR-000",
                     "path": "/v1/<some/endpoint>",
                     "message": "ERROR : 서버 로직에 알 수 없는 오류가 발생했습니다.",
-                }
-            }
+                },
+                {
+                    "timestamp": "2023-02-10T01:00:00.000Z",
+                    "status": 400,
+                    "code": "KB-HTTP-001",
+                    "path": "/v1/<some/endpoint>",
+                    "message": "ERROR : 잘못된 요청입니다.",
+                },
+                {
+                    "timestamp": "2023-02-10T01:00:00.000Z",
+                    "status": 401,
+                    "code": "KB-AUTH-001",
+                    "path": "/v1/<some/endpoint>",
+                    "message": "ERROR : 헤더에서 유저 정보를 찾을 수 없습니다.",
+                },
+                {
+                    "timestamp": "2023-02-10T01:00:00.000Z",
+                    "status": 403,
+                    "code": "KB-AUTH-002",
+                    "path": "/v1/<some/endpoint>",
+                    "message": "ERROR : 권한이 없는 헤더 유저입니다.",
+                },
+                {
+                    "timestamp": "2023-02-10T01:00:00.000Z",
+                    "status": 404,
+                    "code": "KB-HTTP-002",
+                    "path": "/v1/<some/endpoint>",
+                    "message": "ERROR : 해당 리소스를 찾을 수 없습니다.",
+                },
+            ]
         }
+    )
 
 
 class InternalException(Exception):
