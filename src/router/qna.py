@@ -16,10 +16,12 @@ from src.schemas.qna import (
     QnACreate,
     QnAUpdate,
     CommentUpdate,
-    CommentCreate, CommentSchema,
+    CommentCreate,
+    CommentSchema,
 )
 from src.helper.pagination import PaginatedResponse, paginate
 from src.helper.exceptions import ErrorCode
+from src.utils.documents import responses
 from ._check import check_user
 
 
@@ -46,6 +48,7 @@ def generate_new_comment_id():
     description="특정 질문을 생성합니다.",
     status_code=status.HTTP_201_CREATED,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def create_qna_route(
     data: QnACreate, request: Request, request_user: str = Depends(check_user)
@@ -82,6 +85,7 @@ async def create_qna_route(
     description="여러 개의 질문 리스트를 조회합니다.",
     status_code=status.HTTP_200_OK,
     response_model=ResponseSchema[PaginatedResponse[QnASchema]],
+    responses={**responses},
 )
 async def list_qna_route(
     request: Request,
@@ -105,6 +109,7 @@ async def list_qna_route(
     description="특정 질문에 대한 정보를 조회합니다.",
     status_code=status.HTTP_200_OK,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def get_qna_route(id: int, request: Request):
     try:
@@ -130,6 +135,7 @@ async def get_qna_route(id: int, request: Request):
     description="특정 질문에 대한 정보를 수정합니다.",
     status_code=status.HTTP_200_OK,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def update_qna_route(
     id: int, data: QnAUpdate, request: Request, request_user: str = Depends(check_user)
@@ -163,6 +169,7 @@ async def update_qna_route(
     summary="단일 질문 삭제",
     description="특정 질문을 삭제합니다.",
     status_code=status.HTTP_204_NO_CONTENT,
+    responses={**responses},
 )
 async def delete_qna_route(
     id: int, request: Request, request_user: str = Depends(check_user)
@@ -188,6 +195,7 @@ async def delete_qna_route(
     description="특정 질문에 좋아요를 표시합니다.",
     status_code=status.HTTP_202_ACCEPTED,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def like_qna_route(
     id: int, request: Request, request_user: str = Depends(check_user)
@@ -219,6 +227,7 @@ async def like_qna_route(
     description="특정 질문에 표시했던 좋아요를 삭제합니다.",
     status_code=status.HTTP_202_ACCEPTED,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def unlike_qna_route(
     id: int, request: Request, request_user: str = Depends(check_user)
@@ -252,6 +261,7 @@ async def unlike_qna_route(
     description="특정 질문에 게시되어 있는 모든 댓글들을 조회합니다.",
     status_code=status.HTTP_200_OK,
     response_model=ResponseSchema[PaginatedResponse[CommentSchema]],
+    responses={**responses},
 )
 async def list_comments_route(
     id: int,
@@ -284,6 +294,7 @@ async def list_comments_route(
     description="특정 질문에 댓글을 추가합니다.",
     status_code=status.HTTP_201_CREATED,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def add_comment_route(
     id: int,
@@ -325,6 +336,7 @@ async def add_comment_route(
     description="특정 질문에 대한 댓글을 수정합니다.",
     status_code=status.HTTP_200_OK,
     response_model=ResponseSchema[QnASchema],
+    responses={**responses},
 )
 async def update_comment_route(
     qna_id: int,
@@ -364,6 +376,7 @@ async def update_comment_route(
     summary="단일 댓글 삭제",
     description="특정 질문에 대한 댓글을 삭제합니다.",
     status_code=status.HTTP_204_NO_CONTENT,
+    responses={**responses},
 )
 async def delete_comment_route(
     qna_id: int,
