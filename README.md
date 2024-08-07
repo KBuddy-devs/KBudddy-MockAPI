@@ -6,7 +6,8 @@ Mocking Data를 뿌려주는 더미 API 서버입니다.
 
 ## API Docs
 
-추가 예정 (server-side rendered (redoc, swagger 규격) 문서 링크 제공)
+- OpenAPI 규격 (Swagger) : https://mock.bnbong.xyz/docs
+- Redoc 규격 : https://mock.bnbong.xyz/redoc
 
 ## Stack
 
