@@ -1,4 +1,3 @@
-# TODO : Dockerfile 정의, 빌드 파이프라인 구성
 FROM python:3.11.1
 LABEL authors="bnbong"
 

@@ -23,7 +23,7 @@ from src.helper.exceptions import InternalException
 from src.helper.logging import init_logger as _init_logger
 from src.router import router
 from src.core.settings import AppSettings
-from src.utils.documents import add_description_at_api_tags
+from src.utils.documents import add_description_at_api_tags, customize_openapi
 
 try:
     __version__ = get_version(
@@ -61,6 +61,9 @@ def create_app(app_settings: AppSettings) -> FastAPI:
         openapi_url="/openapi.json",
         redoc_url="/redoc",
     )
+
+    # Apply Customized OpenAPI wrapper
+    app.openapi = customize_openapi(app.openapi)
 
     # Apply Middlewares
     if settings.BACKEND_CORS_ORIGINS:
